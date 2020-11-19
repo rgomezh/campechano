@@ -21,5 +21,11 @@ cd ref_repo
 echo ${repos[$1]}
 git clone ${repos[$1]}
 
+array=( $(find . -type f -name "*.out") )
 
+# loop over it
+for i in ${array[@]}
+do
+    echo $i
+done
 
