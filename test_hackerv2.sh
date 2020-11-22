@@ -11,7 +11,10 @@ repos[Los-Bashers]='https://github.com/JoaquinLou/Los-Bashers.git'
 
 # Create a reposotitory folder if not exists and go into 
 folderRepos="ref_repo"
+folderDiff="diff"
+
 mkdir -p "$folderRepos/$1" 
+mkdir -p "$folderDiff"
 
 # Clone the team repository passed by argument  
 git clone -q  ${repos[$1]} $folderRepos/$1
@@ -24,9 +27,16 @@ echo "Tras hackear el repo del equipo ”$1”, este es el resultado:"
 # Loop over it
 for i in ${array[@]}
 do
+	if  [ ! -f $folderRepos/$1/$i ]; then
+		continue
+	fi
+
 	response="Ejercicio ${i:2} es igual"
-	(( $(diff $i $folderRepos/$1/$i | wc -c) > 0 )) && response="Ejercicio ${i:2} NO es igual"
+	diffContent=( $(diff $i $folderRepos/$1/$i) )
+	echo $diffContent > $folderDiff/$folderDiff"_${i:2}"
+	(( $(cat $folderDiff/$folderDiff"_${i:2}" | wc -c) > 1 )) && response="Ejercicio ${i:2} NO es igual"
 	echo $response
 done
 
 rm -rf $folderRepos
+rm -rf $folderDiff
