@@ -1,0 +1,6 @@
+1,2c1,2
+< #!/bin/bash
+< #dsc jue nov 19 19:45:14 CET 2020
+---
+> #!/bin/bash 
+> dsc jue nov 19 19:52:36 CET 2020
