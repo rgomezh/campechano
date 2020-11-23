@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+        echo "No repository supplied"
+        echo "Usage: test_header.sh TEAM_REPOSOTORY_NAME"
+	exit 1
+fi
+
 declare -A repos
 # Create a repository associative array
 repos[campechano]='https://github.com/rgomezh/campechano.git'
